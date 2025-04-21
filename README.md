@@ -1,54 +1,65 @@
 # Leetcode-958.-Check-Completeness-of-a-Binary-Tree
 Check if a Binary Tree is Complete
-This repository provides a C++ implementation to verify whether a given binary tree is a complete binary tree. A binary tree is complete if all levels are fully filled except possibly the last, and all nodes in the last level are as far left as possible.
+This repository provides two different C++ solutions for checking whether a given binary tree is a complete binary tree. Both use different strategies—one based on level-order traversal and the other based on node indexing.
 
-🧠 Problem Statement
-Given the root of a binary tree, determine if it is a complete binary tree.
+✅ What is a Complete Binary Tree?
+A complete binary tree is a binary tree in which:
 
-A complete binary tree has the following properties:
+All levels are fully filled except possibly the last.
 
-Every level except possibly the last is completely filled.
+All nodes in the last level are as far left as possible.
 
-All nodes in the last level are aligned to the left.
+📌 Problem Statement
+Given the root of a binary tree, determine whether it is a complete binary tree.
 
-🧩 Key Concepts
-Level-Order Traversal (BFS): Used to examine the tree level by level.
+🚀 Approaches
+🔹 Approach 1: Level-Order Traversal (BFS)
+Traverse the tree using a queue (level-order).
 
-Queue Data Structure: Helps maintain node processing order.
+Once a NULL node is encountered, no other non-null node should follow.
 
-NULL Tracking: If a NULL is found in level-order traversal, all subsequent nodes must also be NULL.
+If such a node exists after a NULL, the tree is not complete.
 
-🚀 Approach
-Traverse the tree in level-order using a queue.
+Key Code Highlights:
+Uses a queue to simulate level-order.
 
-After encountering a NULL node, ensure that no non-null nodes appear after it.
+Maintains a boolean flag past to track null encounter.
 
-If any non-null node appears after a NULL, return false as the tree is not complete.
+Time & Space Complexity:
+Time: O(N)
 
-If traversal completes without violations, return true.
+Space: O(N)
 
-📂 Code Structure
-isCompleteTree():
+🔹 Approach 2: Index-Based Recursive Check
+First, count the total number of nodes.
 
-Uses a queue to perform level-order traversal.
+Then use DFS to check if each node’s index (in a complete tree array representation) does not exceed the node count.
 
-Tracks the presence of null nodes using a boolean flag past.
+If any node has an index beyond the total count, the tree is not complete.
 
-⏱️ Time and Space Complexity
-Time Complexity: O(N), where N is the number of nodes in the tree.
+Key Code Highlights:
+Assigns indices like in an array representation of a complete binary tree.
 
-Space Complexity: O(N), due to the use of the queue.
+Verifies index bounds for each node recursively.
 
-🧪 Example
+Time & Space Complexity:
+Time: O(N)
+
+Space: O(H), where H is the height of the tree due to recursion stack.
+
+💡 Example
 cpp
-Input: root = [1, 2, 3, 4, 5, 6]
+Input: [1, 2, 3, 4, 5, 6]
 Output: true
-Input: root = [1, 2, 3, 4, 5, null, 7]
+
+Input: [1, 2, 3, 4, 5, null, 7]
 Output: false
 
-📦 Applications
-Heap (binary heap must be a complete binary tree)
 
-Tree balancing algorithms
+🧠 Applications
+Validating binary heaps
 
-Structural validation of data storage trees (e.g., databases, filesystems)
+Ensuring structural integrity in tree-based storage systems
+
+Use cases in balanced tree algorithms
+
